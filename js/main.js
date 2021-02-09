@@ -1,6 +1,7 @@
 'use strict';
 
 {
+//   パネルクラスを定義
   class Panel {
     constructor(){
       const section = document.createElement('section');
@@ -14,6 +15,7 @@
       this.stop = document.createElement('div');
       this.stop.textContent = 'STOP';
       this.stop.classList.add('stop','inactive');
+//       this.stopがinactiveであればスピンを止める
       this.stop.addEventListener('click', () =>{
         if(this.stop.classList.contains('inactive')){
           return;
@@ -22,7 +24,7 @@
         clearTimeout(this.timeoutId);
 
         panelsLeft--;
-
+//         パネルスレフトの数で差別化
         if(panelsLeft === 0 ){
           spin.classList.remove('inactive');
           panelsLeft = 3;
@@ -36,16 +38,17 @@
       const main = document.querySelector('main');
       main.appendChild(section);
     }
-
+//     画像の配列を定義
     getRandomImage(){
       const images = [
         'img/seven.png',
         'img/bell.png',
         'img/cherry.png',
       ];
+//       ランダムな整数値を返す
       return images[Math.floor(Math.random() * images.length)];
     }
-
+// 　　スピン関数を定義
     spin(){
       this.img.src = this.getRandomImage();
       this.timeoutId = setTimeout(() => {
@@ -67,7 +70,7 @@
       this.stop.classList.remove('inactive');
     }
   }
-
+//   パネルが合ってるか判断
   function checkResult(){
     if(panels[0].isUnmatched(panels[1],panels[2])){
       panels[0].unmatch();
@@ -79,7 +82,7 @@
       panels[2].unmatch();
     }
   }
-
+//   パネルインスタンスを作成
   const panels = [
     new Panel(),
     new Panel(),
@@ -87,7 +90,7 @@
   ];
 
   let panelsLeft = 3;
-
+ 
   const spin = document.getElementById('spin');
   spin.addEventListener('click', () => {
     if(spin.classList.contains('inactive')){
